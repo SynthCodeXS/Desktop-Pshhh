@@ -27,10 +27,9 @@ var (
 
 func main() {
 
-	fmt.Print("Введи свой ник: ")
+	fmt.Print("Send username: ")
 	fmt.Scanln(&nick)
 
-	//conn, err := net.Dial("tcp", "16.ip.gl.ply.gg:60348")
 	conn, _, err := websocket.DefaultDialer.Dial("ws://localhost:8080/ws", nil)
 	if err != nil {
 		fmt.Println("net.Dial err:", err)
