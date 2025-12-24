@@ -12,7 +12,7 @@ import (
 	"github.com/gorilla/websocket"
 )
 
-type ChatMessange struct {
+type ChatMessage struct {
 	Nick      string    `json:"nick"`
 	Msg       string    `json:"msg"`
 	Timestamp time.Time `json:"timestamp"`
@@ -30,7 +30,7 @@ func main() {
 	fmt.Print("Send username: ")
 	fmt.Scanln(&nick)
 
-	conn, _, err := websocket.DefaultDialer.Dial("ws://localhost:8080/ws", nil)
+	conn, _, err := websocket.DefaultDialer.Dial("ws://localhost:8443/ws", nil)
 	if err != nil {
 		fmt.Println("net.Dial err:", err)
 		os.Exit(1)
@@ -66,7 +66,7 @@ func main() {
 	//go func() {
 	//	scanner := bufio.NewScanner(conn)
 	//	for scanner.Scan() {
-	//		var msg ChatMessange
+	//		var msg ChatMessage
 	//		if err := json.Unmarshal(scanner.Bytes(), &msg); err != nil {
 	//			continue
 	//		}
@@ -76,7 +76,7 @@ func main() {
 	//}()
 	go func() {
 		for {
-			var msg ChatMessange
+			var msg ChatMessage
 			if err := conn.ReadJSON(&msg); err != nil {
 				fmt.Println("conn.ReadJSON err:", err)
 				return
@@ -93,7 +93,7 @@ func main() {
 	myWindow.ShowAndRun()
 }
 
-func addLabel(msg ChatMessange) {
+func addLabel(msg ChatMessage) {
 	fyne.Do(func() {
 
 		fullText := fmt.Sprintf("%s [%s]: %s",
