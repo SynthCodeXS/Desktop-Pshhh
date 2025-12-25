@@ -17,6 +17,7 @@ import (
 )
 
 type ChatMessage struct {
+	Type      string    `json:"type"`
 	Nick      string    `json:"nick"`
 	To        string    `json:"to"`
 	Msg       string    `json:"msg"`
